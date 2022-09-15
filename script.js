@@ -18,4 +18,14 @@ const game = {
   board: ["", "", "", "", "", "", "", "", ""]
 };
 
-console.log(game.board)
+
+// const displayController = (() => {
+  const squares = document.querySelectorAll(".square");
+
+  squares.forEach((square) => {
+    square.addEventListener("click", () => {
+      square.innerText = "X"
+    })
+  });
+
+// });
