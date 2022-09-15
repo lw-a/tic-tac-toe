@@ -59,6 +59,13 @@ const displayController = (() => {
       squares[i].innerText = game.getSquare(i);
     }
   };
+
+  const restart = document.querySelector(".restart")
+  restart.addEventListener("click", () => {
+    gameController.reset();
+    game.reset();
+    updateBoard();
+  });
 })();
 
 const gameController = (() => {
