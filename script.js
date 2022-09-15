@@ -13,3 +13,9 @@ const playerFactory = (team) => {
 
 const playerX = playerFactory("X");
 const playerO = playerFactory("O");
+
+const game = {
+  board: ["", "", "", "", "", "", "", "", ""]
+};
+
+console.log(game.board)
