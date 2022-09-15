@@ -46,7 +46,7 @@ const displayController = (() => {
 
   squares.forEach((square) => {
     square.addEventListener("click", () => {
-      if (square.innerText != "") return;
+      if (square.innerText != "" || gameController.checkStatus() == true) return;
       const team = gameController.getTeam();
       game.updateBoard([square.dataset.square], team);
       updateBoard();
@@ -76,6 +76,7 @@ const gameController = (() => {
   const playerO = playerFactory("O");
 
   let round = 1;
+  let gameOver = false;
 
   const getTeam = () => {
     return round % 2 === 0 ? playerO.getTeam() : playerX.getTeam();
@@ -89,15 +90,20 @@ const gameController = (() => {
 
   const checkWinner = (() => {
     return winningSets.some((combination) => {
-     return combination.every((value) => {
-        return game.getSquare(value) == getTeam();
+     return combination.every((index) => {
+        return game.getSquare(index) == getTeam();
       });
     });
   });
 
   const reset = () => {
     round = 1;
+    gameOver = false;
   }
 
-  return { getTeam, updateRound, reset, checkWinner };
+  const checkStatus = () => {
+    return gameOver;
+  }
+
+  return { getTeam, updateRound, reset, checkWinner, checkStatus };
 })();
