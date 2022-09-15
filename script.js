@@ -48,11 +48,11 @@ const displayController = (() => {
     square.addEventListener("click", () => {
       if (square.innerText != "") return;
       const team = gameController.getTeam();
-      gameController.updateRound();
       game.updateBoard([square.dataset.square], team);
       updateBoard();
       gameController.checkWinner();
       console.log(gameController.checkWinner());
+      gameController.updateRound();
     })
   });
 
@@ -90,7 +90,7 @@ const gameController = (() => {
   const checkWinner = (() => {
     return winningSets.some((combination) => {
      return combination.every((value) => {
-        return game.getSquare(value) == 'X';
+        return game.getSquare(value) == getTeam();
       });
     });
   });
