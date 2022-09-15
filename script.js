@@ -19,9 +19,9 @@ const playerFactory = (team) => {
 const playerX = playerFactory("X");
 const playerO = playerFactory("O");
 
-const game = {
+const game = (() => {
   board: ["", "", "", "", "", "", "", "", ""]
-};
+});
 
 
 // const displayController = (() => {
