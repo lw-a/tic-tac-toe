@@ -28,8 +28,8 @@ body {
 #gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 24rem;
-  height: 24rem;
+  width: calc(24rem + 4px);
+  height: calc(24rem + 4px);
   margin: 0 auto;
   border: 2px solid darkgrey;
 }
