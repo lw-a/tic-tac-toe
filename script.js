@@ -9,43 +9,55 @@ for (let i = 0; i <= 8; i++) {
 
 const playerFactory = (team) => {
 
+  this.team = team;
+
   const getTeam = () => {
-    return team
+    return team;
   };
 
   return { getTeam };
 };
 
-const playerX = playerFactory("X");
-const playerO = playerFactory("O");
-
 const game = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
-  const showBoard = () => {
-    return board;
-  };
-
-  const updateBoard = (square) => {
-    board[square] = "X";
+  const updateBoard = (square, team) => {
+    board[square] = team;
     console.log(board)
   };
 
-  return { showBoard, updateBoard };
+  return { updateBoard };
 })();
-console.log(game)
-console.log(game.showBoard)
-game.showBoard
 
-// const displayController = (() => {
+const displayController = (() => {
   const squares = document.querySelectorAll(".square");
 
   squares.forEach((square) => {
     square.addEventListener("click", () => {
-      square.innerText = "X"
-      game.updateBoard([square.dataset.square])
-      // console.log(game.showBoard)
+      if (square.innerText != "") return;
+      const team = gameController.getTeam();
+      gameController.updateRound();
+      console.log(team);
+      square.innerText = team;
+      game.updateBoard([square.dataset.square], team);
     })
   });
+})();
 
-// });
+const gameController = (() => {
+
+  const playerX = playerFactory("X");
+  const playerO = playerFactory("O");
+
+  let round = 1;
+
+  const getTeam = () => {
+    return round % 2 === 0 ? playerO.getTeam() : playerX.getTeam();
+  };
+
+  const updateRound = () => {
+    round++;
+  }
+
+  return { getTeam, updateRound };
+})();
