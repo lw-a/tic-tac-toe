@@ -16,7 +16,7 @@ const playerFactory = (team) => {
   return { getTeam };
 };
 
-const game = (() => {
+const boardController = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
   const getBoard = () => {
@@ -48,7 +48,9 @@ const displayController = (() => {
     square.addEventListener("click", () => {
       if (square.innerText != "" || gameController.checkStatus() == true) return;
       const team = gameController.getTeam();
-      game.updateBoard([square.dataset.square], team);
+
+
+      boardController.updateBoard([square.dataset.square], team);
       updateBoard();
       gameController.checkWinner();
       console.log(gameController.checkWinner());
@@ -58,14 +60,14 @@ const displayController = (() => {
 
   const updateBoard = () => {
     for (i = 0; i < squares.length; i++) {
-      squares[i].innerText = game.getSquare(i);
+      squares[i].innerText = boardController.getSquare(i);
     }
   };
 
   const restart = document.querySelector(".restart")
   restart.addEventListener("click", () => {
     gameController.reset();
-    game.reset();
+    boardController.reset();
     updateBoard();
   });
 })();
@@ -78,9 +80,15 @@ const gameController = (() => {
   let round = 1;
   let gameOver = false;
 
+
   const getTeam = () => {
     return round % 2 === 0 ? playerO.getTeam() : playerX.getTeam();
   };
+
+  const playGame = (() => {
+
+  })
+
 
   const updateRound = () => {
     round++;
@@ -91,7 +99,7 @@ const gameController = (() => {
   const checkWinner = (() => {
     return winningSets.some((combination) => {
      return combination.every((index) => {
-        return game.getSquare(index) == getTeam();
+        return boardController.getSquare(index) == getTeam();
       });
     });
   });
@@ -105,5 +113,5 @@ const gameController = (() => {
     return gameOver;
   }
 
-  return { getTeam, updateRound, reset, checkWinner, checkStatus };
+  return { getTeam, updateRound, reset, checkWinner, checkStatus, playGame };
 })();
