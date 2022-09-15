@@ -50,7 +50,6 @@ const displayController = (() => {
 
       gameController.playGame(square);
       updateBoard();
-
     })
   });
 
@@ -60,12 +59,28 @@ const displayController = (() => {
     }
   };
 
+  const message = document.querySelector(".message");
+
+  const setMessage = (() => {
+      message.innerText = `Player ${gameController.getTeam()}'s turn`
+  });
+  const endMessage = ((result) => {
+    if (result == "draw") {
+      message.innerText = "It's a draw!"
+    } else {
+      message.innerText = `Player ${result} wins!`
+    }
+  })
+
   const restart = document.querySelector(".restart")
   restart.addEventListener("click", () => {
     gameController.reset();
     boardController.reset();
+    setMessage();
     updateBoard();
   });
+
+  return { setMessage, endMessage };
 })();
 
 const gameController = (() => {
@@ -76,11 +91,12 @@ const gameController = (() => {
   let round = 1;
   let gameOver = false;
 
+  const getTeam = () => {
+    return round % 2 === 0 ? playerO.getTeam() : playerX.getTeam();
+  };
+
   const playGame = ((square) => {
 
-    const getTeam = () => {
-      return round % 2 === 0 ? playerO.getTeam() : playerX.getTeam();
-    };
 
     boardController.updateBoard([square.dataset.square], getTeam());
 
@@ -94,9 +110,17 @@ const gameController = (() => {
 
     console.log(checkWinner());
 
-    if (checkWinner() == true) gameOver = true;
+    if (checkWinner() == true) {
+      gameOver = true;
+      displayController.endMessage(getTeam())
+    } else if (round == 9) {
+      gameOver = true;
+      displayController.endMessage("draw")
+    } else {
+      round++;
+      displayController.setMessage();
+    };
 
-    round++;
   })
 
   const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
@@ -111,5 +135,5 @@ const gameController = (() => {
     return gameOver;
   }
 
-  return { reset, checkStatus, playGame };
+  return { reset, checkStatus, playGame, getTeam };
 })();
