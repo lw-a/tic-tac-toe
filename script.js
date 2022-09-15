@@ -52,7 +52,7 @@ const displayController = (() => {
       game.updateBoard([square.dataset.square], team);
       updateBoard();
       gameController.checkWinner();
-      console.log(gameController.checkWinner())
+      console.log(gameController.checkWinner());
     })
   });
 
@@ -89,8 +89,8 @@ const gameController = (() => {
 
   const checkWinner = (() => {
     return winningSets.some((combination) => {
-      combination.every((index) => {
-        game.getSquare(index) == "X";
+     return combination.every((value) => {
+        return game.getSquare(value) == 'X';
       });
     });
   });
