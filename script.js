@@ -29,7 +29,6 @@ const boardController = (() => {
 
   const updateBoard = (square, team) => {
     board[square] = team;
-    console.log(board);
   };
 
   const reset = () => {
@@ -97,8 +96,9 @@ const gameController = (() => {
 
   const playGame = ((square) => {
 
-
     boardController.updateBoard([square.dataset.square], getTeam());
+
+    const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
     const checkWinner = (() => {
       return winningSets.some((combination) => {
@@ -107,8 +107,6 @@ const gameController = (() => {
         });
       });
     });
-
-    console.log(checkWinner());
 
     if (checkWinner() == true) {
       gameOver = true;
@@ -122,9 +120,6 @@ const gameController = (() => {
     };
 
   })
-
-  const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-
 
   const reset = () => {
     round = 1;
