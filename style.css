@@ -29,16 +29,17 @@ body {
 #gameboard {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 304px;
-  height: 304px;
+  width: 24rem;
+  height: 24rem;
   margin: 0 auto;
   border: 2px solid darkgrey;
 }
 
 .square {
-  width: 100px;
-  height: 100px;
+  width: 100%;
+  height: 100%;
   border: 1px solid darkgrey;
+
 }
 
 .square:hover {

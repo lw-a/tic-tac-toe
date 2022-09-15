@@ -6,3 +6,10 @@ for (let i = 0; i <= 8; i++) {
   square.dataset.square = i;
   gameBoard.appendChild(square);
 }
+
+const playerFactory = (team) => {
+  return { team };
+};
+
+const playerX = playerFactory("X");
+const playerO = playerFactory("O");
