@@ -9,8 +9,6 @@ for (let i = 0; i <= 8; i++) {
 
 const playerFactory = (team) => {
 
-  this.team = team;
-
   const getTeam = () => {
     return team;
   };
@@ -21,12 +19,26 @@ const playerFactory = (team) => {
 const game = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
 
-  const updateBoard = (square, team) => {
-    board[square] = team;
-    console.log(board)
+  const getBoard = () => {
+    return board;
   };
 
-  return { updateBoard };
+  const getSquare = (i) => {
+    return board[i];
+  };
+
+  const updateBoard = (square, team) => {
+    board[square] = team;
+    console.log(board);
+  };
+
+  const reset = () => {
+    for (let i = 0; i < board.length; i++) {
+      board[i] = "";
+    };
+  };
+
+  return { getBoard, updateBoard, reset, getSquare };
 })();
 
 const displayController = (() => {
@@ -37,10 +49,16 @@ const displayController = (() => {
       if (square.innerText != "") return;
       const team = gameController.getTeam();
       gameController.updateRound();
-      square.innerText = team;
       game.updateBoard([square.dataset.square], team);
+      updateBoard();
     })
   });
+
+  const updateBoard = () => {
+    for (i = 0; i < squares.length; i++) {
+      squares[i].innerText = game.getSquare(i);
+    }
+  };
 })();
 
 const gameController = (() => {
@@ -60,5 +78,9 @@ const gameController = (() => {
 
   const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-  return { getTeam, updateRound };
+  const reset = () => {
+    round = 1;
+  }
+
+  return { getTeam, updateRound, reset };
 })();
