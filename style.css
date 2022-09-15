@@ -46,6 +46,10 @@ body {
   background-color: #FECD70;
 }
 
+.restart {
+padding: 12px 24px;
+}
+
 /* footer  */
 
 .footer {

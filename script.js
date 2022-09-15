@@ -51,6 +51,7 @@ const displayController = (() => {
       gameController.updateRound();
       game.updateBoard([square.dataset.square], team);
       updateBoard();
+      gameController.checkWinner();
     })
   });
 
@@ -84,10 +85,17 @@ const gameController = (() => {
   }
 
   const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  const checkWinner = () => {
+    winningSets.forEach((set) => {
+        if ( game.getSquare(set[0]) == "X" && game.getSquare(set[1])  == "X" && game.getSquare(set[2]) == "X") {
+          console.log("X wins")
+        }
+    });
+  }
 
   const reset = () => {
     round = 1;
   }
 
-  return { getTeam, updateRound, reset };
+  return { getTeam, updateRound, reset, checkWinner };
 })();
