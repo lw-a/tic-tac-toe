@@ -1,38 +1,53 @@
+:root {
+  --colour1: #222831;
+  --colour2: #393E46;
+  --colour3: #00ADB5;
+  --colour4: #EEEEEE;
+}
+
 a {
   text-decoration: none;
 }
 
 body {
-  background-color: #F3E0B5;
+  background-color: var(--colour2);
   margin: 0;
-  color: rgb(40, 40, 40);
 }
 
 html {
   position: relative;
   min-height: 100%;
+  font-family: sans-serif;
 }
 /* header */
 
 .header {
-  padding: 24px;
-  background-color: #FECD70;
+  padding: 12px;
+  background-color: var(--colour3);
 }
 
 .title {
   text-align: center;
+  margin: 6px;
+  color: var(--colour4);
+  font-size: 4rem;
 }
 
 /* main  */
 
 .main {
-  /* padding: 24px; */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 12px;
-  margin-bottom: 120px;
+  margin-bottom: 96px;
+  color: var(--colour4);
+}
+
+.message {
+  font-size: 3rem;
+  margin: 12px;
 }
 
 #gameboard {
@@ -50,16 +65,33 @@ html {
   border: 1px solid darkgrey;
   text-align: center;
   font-size: 8rem;
+  cursor: pointer;
 }
 
 .square:hover {
-  background-color: #FECD70;
+  background-color: var(--colour3);
 }
 
 .restart {
-padding: 12px 24px;
-background-color: #FECD70;
-margin-top: 19px;
+  padding: 12px 24px;
+  background-color: var(--colour3);
+  margin-top: 12px;
+  border: none;
+  border-radius: 5%;
+  color: var(--colour4);
+  font-weight: 600;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.restart:hover {
+  background-color: var(--colour1);
+
+}
+
+.restart:active {
+  background-color: var(--colour3);
+  color: var(--colour4);
 }
 
 /* footer  */
@@ -72,11 +104,11 @@ margin-top: 19px;
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 24px;
-
-  background-color: #FFAE6D;
+  font-size: 1.5rem;
+  color: var(--colour4);
+  background-color: var(--colour1);
 }
 
 .footer a {
-  color: black;
+  color: var(--colour4);
 }
