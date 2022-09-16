@@ -1,3 +1,5 @@
+// Adds game board to the DOM
+
 const gameBoard = document.getElementById("gameboard");
 
 for (let i = 0; i <= 8; i++) {
@@ -7,6 +9,8 @@ for (let i = 0; i <= 8; i++) {
   gameBoard.appendChild(square);
 }
 
+// Player Factory
+
 const playerFactory = (team) => {
 
   const getTeam = () => {
@@ -15,6 +19,8 @@ const playerFactory = (team) => {
 
   return { getTeam };
 };
+
+// Board Controller
 
 const boardController = (() => {
   const board = ["", "", "", "", "", "", "", "", ""];
@@ -39,6 +45,8 @@ const boardController = (() => {
 
   return { getBoard, updateBoard, reset, getSquare };
 })();
+
+// Display Controller
 
 const displayController = (() => {
   const squares = document.querySelectorAll(".square");
@@ -82,6 +90,8 @@ const displayController = (() => {
   return { setMessage, endMessage };
 })();
 
+// Game Controller
+
 const gameController = (() => {
 
   const playerX = playerFactory("X");
@@ -103,6 +113,7 @@ const gameController = (() => {
     const checkWinner = (() => {
       return winningSets.some((combination) => {
         return combination.every((index) => {
+          // called index as its used as an index in boardController.getSquare
           return boardController.getSquare(index) == getTeam();
         });
       });
