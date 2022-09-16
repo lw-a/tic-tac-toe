@@ -1,6 +1,6 @@
-# sketchbook
+# Tic Tac Toe
 
-Drawing application made in vanilla Javascript.
+A Tic Tac Toe game made in vanilla Javascript.
 
 Created to practice factory functions and modules.
 
