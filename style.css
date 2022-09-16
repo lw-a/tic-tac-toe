@@ -6,10 +6,12 @@ body {
   background-color: #F3E0B5;
   margin: 0;
   color: rgb(40, 40, 40);
+}
+
+html {
   position: relative;
   min-height: 100%;
 }
-
 /* header */
 
 .header {
@@ -30,6 +32,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 12px;
+  margin-bottom: 120px;
 }
 
 #gameboard {
@@ -57,7 +60,6 @@ body {
 padding: 12px 24px;
 background-color: #FECD70;
 margin-top: 19px;
-margin-bottom: 19px;
 }
 
 /* footer  */
